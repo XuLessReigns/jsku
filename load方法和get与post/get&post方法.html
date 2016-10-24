@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+            //以下两种方法参数分别为：
+            //参数1：请求地址
+            //参数2：向服务器传递的数据
+            //参数3：请求成功后的回调函数
+            //参数4：指定服务器返回的数据类型
+
+            // $.get("test.aspx",{name:"aaa",age:30},function(data){
+            //     console.log(data);
+            // },"json");
+
+            // $.post("test.aspx",{name:"bbb",age:20},function(data){
+            //     console.log(data);
+            // },"json");
+
+            // $.getJSON("1.json",function(data){
+            //     console.log(data);
+            // });
+
+            // $(":button").click(function(){
+            //     $.getScript("test.js");
+            // });
+
+            //comet技术(AJAX轮询技术)   websocket（网页TCP通信技术）
+            var request = function(){
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/test.aspx",
+                    data:{name:"bbb",age:100},
+                    dataType:"jsonp",
+                    success:function(data){
+                        console.log(data);
+                    },
+                    timeout:3000,
+                    error:function(obj,status,error){
+                        console.log(arguments);
+                    }
+                });
+            }
+
+            request();
+
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="动态加载JS">
+</body>
+</html>

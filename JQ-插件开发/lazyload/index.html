@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX懒加载</title>
+    <style>
+        div{
+            width:500px;
+            height:300px;
+            margin-top:800px;
+        }
+    </style>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+            // var $elements = $("div");
+            // for(var i = 0; i < $elements.length;i++){
+            //     console.log($elements[i]);
+            // }
+
+            $("div").each(function(i,o){
+                $(o).attr("isLoad","load");
+            });
+
+            $(window).scroll(function(){
+                $("div").each(function(i,o){
+                    if($(window).height() + $(window).scrollTop() > $(o).offset().top
+                     && $(window).scrollTop() < $(o).offset().top + $(o).height()
+                     && $(o).attr("isLoad") == "load"){
+                        $(o).attr("isLoad","no");
+                        $(o).html("<img src='ajax-loader.gif' />");
+                        $.get("timeout.aspx",function(data){
+                            $(o).html(data);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="background:red;"></div>
+    <div style="background:red;"></div>
+    <div style="background:red;"></div>
+    <div style="background:red;"></div>
+    <div style="background:red;"></div>
+    <div style="background:red;"></div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片懒加载</title>
+    <style>
+        img{
+            display:block;
+            margin-top:800px;
+        }
+    </style>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+            $(window).scroll(function(){
+                $("img").each(function(i,o){
+                    if($(window).height() + $(window).scrollTop() > $(o).offset().top
+                    && $(window).scrollTop() < $(o).height() + $(o).offset().top){
+                        var $url = $(o).attr("origin");
+                        $(o).attr("src",$url);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <img src="logo.png" origin="banner1.jpg" />
+    <img src="logo.png" origin="banner2.jpg" />
+    <img src="logo.png" origin="banner3.jpg" />
+</body>
+</html>

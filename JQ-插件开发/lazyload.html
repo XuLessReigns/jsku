@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            width:765px;
+            height:574px;
+        }
+    </style>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script>
+    <script>
+        $(function(){
+            $("img").lazyload({
+                effect:"fadeIn",
+                threshold:100,
+                placeholder:"img/grey.gif"
+            });
+        });
+    </script>
+</head>
+<body>
+    <img data-original="img/bmw_m1_hood.jpg" alt="">
+    <img data-original="img/bmw_m1_side.jpg" alt="">
+    <img data-original="img/bmw_m3_gt.jpg" alt="">
+    <img data-original="img/corvette_pitstop.jpg" alt="">
+    <img data-original="img/viper_1.jpg" alt="">
+    <img data-original="img/viper_corner.jpg" alt="">
+</body>
+</html>

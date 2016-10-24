@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>天猫</title>
+	<style>
+		*{
+			margin:0; padding: 0;
+		}
+		body{
+			height:3000px;
+			font-family: 微软雅黑;
+			font-size:14px;
+		}
+		#sidebar{
+			position: fixed;
+			width:35px;
+			height: 100%;
+			background:#000;
+			right:0;
+			z-index: 2;
+		}
+		#side_shopcart{
+			position: fixed;
+			width:0px;
+			height: 100%;
+			background:#393939;
+			right:0;
+			z-index: 2;
+		}
+		.logo{
+			width:35px;
+			height:35px;
+			background: url(img/1.png);
+			margin-top: 120px;
+			cursor: pointer;
+		}
+		.logo:hover{
+			background: url(img/1.png) #C40000;
+		}
+		.shopcart{
+			margin-left: 4px;
+			width: 27px;
+			height:98px;
+			margin-top: 18px;
+			border-top:solid 1px #C1C1C1;
+			border-bottom:solid 1px #C1C1C1;
+			cursor: pointer;
+		}
+		.cartimg{
+			width: 27px;
+			height: 35px;
+			background: url(img/cart.png) -4px;
+			display: block;
+		}
+		.carttext{
+			color: #fff;
+			padding-bottom: 7px;
+			text-align: center;
+			display: block;
+		}
+		.cz{
+			width:35px;
+			height:35px;
+			background: url(img/2.png);
+			margin-top: 18px;
+			cursor: pointer;
+		}
+		.cz:hover{
+			background: url(img/2.png) #C40000;
+		}
+		.gz{
+			width:35px;
+			height:35px;
+			background: url(img/3.png);
+			margin-top: 18px;
+			cursor: pointer;
+		}
+		.gz:hover{
+			background: url(img/3.png) #C40000;
+		}
+		.sc{
+			width:35px;
+			height:35px;
+			background: url(img/4.png);
+			margin-top: 18px;
+			cursor: pointer;
+		}
+		.sc:hover{
+			background: url(img/4.png) #C40000;
+		}
+		.top{
+			width:35px;
+			height:35px;
+			background: url(img/top.png);
+			position: absolute;
+			bottom: 18px;
+			cursor: pointer;
+			display: none;
+		}
+		.desc{
+			background:#494949;
+			width:90px;
+			height:35px;
+			line-height: 35px;
+			text-align: center;
+			position: absolute;
+			color: #fff;
+			font-size: 13px;
+			z-index: 10;
+			display:none;
+		}
+		.desc div{
+		    position: absolute;
+		    top: 2px;
+		    right: -7px;
+		}
+		.menu{
+			width: 100%;
+			height:50px;
+			background:#C40000;
+			opacity: 0.8;
+			filter: alpha(opacity=80);
+			position: fixed;
+			top:0;
+			z-index: 1;
+			display: none;
+		}
+	</style>
+	<script src="../js/jquery-1.12.4.js"></script>
+	<script>
+		$(function(){
+			var $desc = $("<div class='desc'></div>")
+			.prependTo("body");
+			var $menu = $("<div class='menu'></div>")
+			.appendTo("body");
+			$("#sidebar>div:not(.shopcart)").hover(function(){
+				var $tool = $(this).attr("tooltips");
+				$desc.html($tool + "<div><img src='img/jt.png' /></div>");
+				$desc.css({
+					left:$(this).offset().left - $desc.width() - 30,
+					top:$(this).offset().top,
+					opacity:0
+				}).show().stop().animate({
+					left:$(this).offset().left - $desc.width(),
+					opacity:1
+				},400);
+			},function(){
+				$desc.stop().animate({
+					left:$(this).offset().left - $desc.width() - 30,
+					opacity:0
+				},400);
+			});
+
+			$(window).scroll(function(){
+				if($(window).scrollTop() > $(window).height()){
+					$menu.slideDown(400);
+					$(".top").fadeIn(200);
+				}
+				else{
+					$menu.slideUp(200);
+					$(".top").fadeOut(200);
+				}
+			});
+
+			$(".top").click(function(){
+				$("html,body").animate({
+					scrollTop:0
+				},600);
+			});
+
+			$(".shopcart").click(function(){
+				$("#side_shopcart").animate({
+					width:280
+				},400);
+				$("#sidebar").animate({
+					right:280
+				},400);
+			});
+		});
+	</script>
+</head>
+<body>
+	<!--<div class="desc">我的特权<div><img src="img/jt.png"></div></div>-->
+	<div id="sidebar">
+		<div class="logo" tooltips="我的特权"></div>
+		<div class="shopcart">
+			<span class="cartimg"></span>
+			<span class="carttext">购物车</span>
+		</div>
+		<div class="cz" tooltips="我的资产"></div>
+		<div class="gz" tooltips="我的关注品牌"></div>
+		<div class="sc" tooltips="我的收藏"></div>
+		<div class="top" tooltips="返回顶部"></div>
+	</div>
+	<div id="side_shopcart">
+	</div>
+</body>
+</html>

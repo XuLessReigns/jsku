@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>基于jquery.fly模仿天猫抛物线加入购物车特效代码</title>
+<style>
+
+* {margin:0;padding:0;list-style:none;}
+.m-tip {border: 4px solid #ccc;color: #999;width:1000px;height:300px;margin:200px auto; text-align:center;line-height:30px;padding-top:100px;cursor:pointer;}
+.m-sidebar {position: fixed;top: 0;right: 0;background: #000;z-index: 2000;	width: 35px;height: 100%;font-size: 12px;color: #fff;}
+.m-sidebar .cart {color: #fff;text-align: center;line-height: 20px;padding: 200px 0 0 0px;top:100px;}
+.m-sidebar .cart span {	display: block;	width: 20px;margin: 0 auto;}
+.m-sidebar .cart i {width: 35px;height: 35px;display: block;}
+.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+
+</style>
+</head>
+<body>
+
+<!--代码部分begin-->
+<div class="m-tip"> 
+	懒人之家提示：<br />
+	点击方框，实现加入购物车效果
+</div>
+<div class="m-sidebar">
+	<div class="cart">
+    	<i id="end"></i>
+        <span>购物车</span>
+    </div>
+</div>
+<script src="http://www.lanrenzhijia.com/ajaxjs/1.9.1/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.fly.min.js"></script> 
+<script>
+$('.m-tip').on('click', addCart);
+function addCart(event) {
+var offset = $('#end').offset(), flyer = $('<img class="u-flyer" src="images/lanrenzhijia.jpg"/>');
+flyer.fly({
+    start: {
+        left: event.pageX,
+        top: event.pageY
+    },
+    end: {
+        left: offset.left,
+        top: offset.top,
+        width: 20,
+        height: 20
+    }
+});
+}
+</script> 
+<!--代码部分end-->
+
+</body>
+</html>
